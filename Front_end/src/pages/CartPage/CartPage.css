@@ -1,0 +1,24 @@
+.cartPage {
+  background: var(--page-bg);
+  padding: 28px 0 48px;
+}
+
+.cartPage__container {
+  width: 1126px;
+  max-width: calc(100% - 32px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .cartPage {
+    padding: 18px 0 32px;
+  }
+  .cartPage__container {
+    max-width: calc(100% - 24px);
+    gap: 18px;
+  }
+}
+
