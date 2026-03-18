@@ -1,0 +1,22 @@
+services:
+  # Tên dịch vụ Frontend
+  frontend:
+    build: ./Font_end
+    container_name: frontend_container
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./Font_end:/app
+      - /app/node_modules # Giữ lại node_modules trong container để tránh conflict với máy thật
+
+  # Tên dịch vụ Backend
+  backend:
+    build: ./Back_end
+    container_name: backend_container
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Back_end:/app
+      - /app/node_modules
+    environment:
+      - PORT=3000
