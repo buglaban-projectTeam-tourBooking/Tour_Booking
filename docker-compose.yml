@@ -1,12 +1,12 @@
 services:
   # Tên dịch vụ Frontend
   frontend:
-    build: ./Font_end
+    build: ./Front_end
     container_name: frontend_container
     ports:
       - "5173:5173"
     volumes:
-      - ./Font_end:/app
+      - ./Front_end:/app
       - /app/node_modules # Giữ lại node_modules trong container để tránh conflict với máy thật
 
   # Tên dịch vụ Backend
