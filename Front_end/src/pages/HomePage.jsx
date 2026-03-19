@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './HomePage.css';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./HomePage.css";
 
 const HomePage = () => {
   const [tours, setTours] = useState([]);
@@ -9,7 +9,7 @@ const HomePage = () => {
   const [featured, setFeatured] = useState([]);
   const navigate = useNavigate();
 
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
   useEffect(() => {
     fetchFeaturedTours();
@@ -27,7 +27,7 @@ const HomePage = () => {
       setTours(response.data.data || []);
       setFeatured(response.data.data?.slice(0, 4) || []);
     } catch (err) {
-      console.error('Error fetching tours:', err);
+      console.error("Error fetching tours:", err);
     } finally {
       setLoading(false);
     }
@@ -37,16 +37,18 @@ const HomePage = () => {
     e.preventDefault();
     const destination = e.target.elements.destination.value;
     const startDate = e.target.elements.startDate.value;
-    
+
     if (destination) {
-      navigate(`/tours/domestic?destination=${encodeURIComponent(destination)}`);
+      navigate(
+        `/tours/domestic?destination=${encodeURIComponent(destination)}`,
+      );
     }
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('vi-VN', {
-      style: 'currency',
-      currency: 'VND',
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
       maximumFractionDigits: 0,
     }).format(price);
   };
@@ -54,11 +56,11 @@ const HomePage = () => {
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
+
     return (
       <>
-        {'★'.repeat(fullStars)}
-        {hasHalfStar && '☆'}
+        {"★".repeat(fullStars)}
+        {hasHalfStar && "☆"}
       </>
     );
   };
@@ -68,10 +70,9 @@ const HomePage = () => {
       {/* Hero Banner Section */}
       <section className="hero-banner">
         <div className="hero-content">
-          <h1 className="hero-title">Du Lịch Châu Á - Khám Phá Mỹ, Úc, Âu Á Nơi Đầu Hân Muôn</h1>
-          <p className="hero-subtitle">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          </p>
+          <h1 className="hero-title">
+            Du Lịch Châu Á - Khám Phá Mỹ, Úc, Âu Á Nơi Đầu Hân Muôn
+          </h1>
 
           {/* Search Form */}
           <form className="search-form-hero" onSubmit={handleSearch}>
@@ -86,13 +87,11 @@ const HomePage = () => {
             </div>
             <div className="search-field">
               <label htmlFor="startDate">Ngày Khởi Hành</label>
-              <input
-                id="startDate"
-                type="date"
-                name="startDate"
-              />
+              <input id="startDate" type="date" name="startDate" />
             </div>
-            <button type="submit" className="btn-search-hero">Tìm Kiếm</button>
+            <button type="submit" className="btn-search-hero">
+              Tìm Kiếm
+            </button>
           </form>
         </div>
       </section>
@@ -124,7 +123,9 @@ const HomePage = () => {
                     <span className="countdown-label">Phút</span>
                   </div>
                 </div>
-                <p className="offer-price">Giá từ <strong>990.000đ</strong></p>
+                <p className="offer-price">
+                  Giá từ <strong>990.000đ</strong>
+                </p>
               </div>
             </div>
 
@@ -148,7 +149,9 @@ const HomePage = () => {
                     <span className="countdown-label">Phút</span>
                   </div>
                 </div>
-                <p className="offer-price">Giá từ <strong>1,250.000đ</strong></p>
+                <p className="offer-price">
+                  Giá từ <strong>1,250.000đ</strong>
+                </p>
               </div>
             </div>
 
@@ -172,7 +175,35 @@ const HomePage = () => {
                     <span className="countdown-label">Phút</span>
                   </div>
                 </div>
-                <p className="offer-price">Giá từ <strong>4,500.000đ</strong></p>
+                <p className="offer-price">
+                  Giá từ <strong>4,500.000đ</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* Offer 4 */}
+            <div className="offer-card offer-card-quaternary">
+              <div className="offer-icon">🌟</div>
+              <div className="offer-content">
+                <h3>Khuyến Mãi VIP</h3>
+                <p>Tour Cao Cấp</p>
+                <div className="countdown">
+                  <div className="countdown-item">
+                    <span className="countdown-value">10</span>
+                    <span className="countdown-label">Ngày</span>
+                  </div>
+                  <div className="countdown-item">
+                    <span className="countdown-value">12</span>
+                    <span className="countdown-label">Giờ</span>
+                  </div>
+                  <div className="countdown-item">
+                    <span className="countdown-value">00</span>
+                    <span className="countdown-label">Phút</span>
+                  </div>
+                </div>
+                <p className="offer-price">
+                  Giá từ <strong>2,200.000đ</strong>
+                </p>
               </div>
             </div>
 
@@ -182,7 +213,9 @@ const HomePage = () => {
                 <div className="offer-tour-image">
                   <img src={tour.image} alt={tour.title} />
                   {tour.discount > 0 && (
-                    <span className="discount-badge">♥ GIẢM {tour.discount}%</span>
+                    <span className="discount-badge">
+                      ♥ GIẢM {tour.discount}%
+                    </span>
                   )}
                 </div>
                 <div className="offer-tour-info">
@@ -201,8 +234,12 @@ const HomePage = () => {
                     <span className="reviews">({tour.reviews})</span>
                   </div>
                   <div className="offer-tour-price">
-                    <span className="price-original">{formatPrice(tour.originalPrice)}</span>
-                    <span className="price-current">{formatPrice(tour.price)}</span>
+                    <span className="price-original">
+                      {formatPrice(tour.originalPrice)}
+                    </span>
+                    <span className="price-current">
+                      {formatPrice(tour.price)}
+                    </span>
                   </div>
                   <Link to={`/tour/${tour.id}`} className="btn-view-offer">
                     Xem Chi Tiết
@@ -217,46 +254,66 @@ const HomePage = () => {
       {/* Special Tour Destinations */}
       <section className="special-destinations">
         <div className="container">
-          <h2 className="section-title">Khuyên Mại Bùng Nổ - Dành Tặn Nông Bắc</h2>
-          
+          <h2 className="section-title">
+            Khuyên Mại Bùng Nổ - Dành Tặn Nông Bắc
+          </h2>
+
           <div className="destinations-carousel">
             <div className="destination-card">
-              <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gô+Nam+Du" alt="Tour Gô Nam Du" />
+              <img
+                src="https://via.placeholder.com/400x300/667eea/ffffff?text=Gô+Nam+Du"
+                alt="Tour Gô Nam Du"
+              />
               <div className="destination-info">
                 <h3>TOUR GÔ NAM DU</h3>
                 <p>1,250.000đ</p>
               </div>
             </div>
             <div className="destination-card featured">
-              <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Nước+Ngoài" alt="International Tour" />
+              <img
+                src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Nước+Ngoài"
+                alt="International Tour"
+              />
               <div className="destination-info">
                 <h3>Tour Nước Ngoài</h3>
                 <p>Khám Phá Thế Giới</p>
               </div>
             </div>
             <div className="destination-card">
-              <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Thành+Phố" alt="Tour Thành Phố" />
+              <img
+                src="https://via.placeholder.com/400x300/667eea/ffffff?text=Thành+Phố"
+                alt="Tour Thành Phố"
+              />
               <div className="destination-info">
                 <h3>Hành Trình Thành Phố</h3>
                 <p>Tận Hưởng Tây Âu</p>
               </div>
             </div>
             <div className="destination-card">
-              <img src="https://via.placeholder.com/400x300/e74c3c/ffffff?text=Phú+Quốc" alt="Tour Phú Quốc" />
+              <img
+                src="https://via.placeholder.com/400x300/e74c3c/ffffff?text=Phú+Quốc"
+                alt="Tour Phú Quốc"
+              />
               <div className="destination-info">
                 <h3>TOUR PHÚ QUỐC</h3>
                 <p>2,100.000đ</p>
               </div>
             </div>
             <div className="destination-card">
-              <img src="https://via.placeholder.com/400x300/3498db/ffffff?text=Đà+Nẵng" alt="Tour Đà Nẵng" />
+              <img
+                src="https://via.placeholder.com/400x300/3498db/ffffff?text=Đà+Nẵng"
+                alt="Tour Đà Nẵng"
+              />
               <div className="destination-info">
                 <h3>COMBO ĐÀ NẴNG</h3>
                 <p>1,890.000đ</p>
               </div>
             </div>
             <div className="destination-card">
-              <img src="https://via.placeholder.com/400x300/2ecc71/ffffff?text=Sa+Pa" alt="Tour Sa Pa" />
+              <img
+                src="https://via.placeholder.com/400x300/2ecc71/ffffff?text=Sa+Pa"
+                alt="Tour Sa Pa"
+              />
               <div className="destination-info">
                 <h3>TOUR SA PA</h3>
                 <p>1,650.000đ</p>
@@ -275,52 +332,72 @@ const HomePage = () => {
           <div className="flash-sale-grid">
             <div className="flash-sale-card">
               <div className="flash-sale-image">
-                <img src="https://via.placeholder.com/400x250/f39c12/ffffff?text=Vịnh+Hạ+Long" alt="Vịnh Hạ Long" />
+                <img
+                  src="https://via.placeholder.com/400x250/f39c12/ffffff?text=Vịnh+Hạ+Long"
+                  alt="Vịnh Hạ Long"
+                />
                 <span className="flash-badge">🔥 -40%</span>
               </div>
               <div className="flash-sale-info">
                 <h4>Vịnh Hạ Long 2N1Đ</h4>
                 <p className="flash-original">Giá gốc: 3,500.000đ</p>
-                <p className="flash-price">Chỉ còn: <strong>2,100.000đ</strong></p>
+                <p className="flash-price">
+                  Chỉ còn: <strong>2,100.000đ</strong>
+                </p>
                 <button className="btn-flash-sale">Mua Ngay</button>
               </div>
             </div>
 
             <div className="flash-sale-card">
               <div className="flash-sale-image">
-                <img src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Sapa+Fansipan" alt="Sapa" />
+                <img
+                  src="https://via.placeholder.com/400x250/9b59b6/ffffff?text=Sapa+Fansipan"
+                  alt="Sapa"
+                />
                 <span className="flash-badge">🔥 -35%</span>
               </div>
               <div className="flash-sale-info">
                 <h4>Sapa - Fansipan 3N2Đ</h4>
                 <p className="flash-original">Giá gốc: 2,800.000đ</p>
-                <p className="flash-price">Chỉ còn: <strong>1,820.000đ</strong></p>
+                <p className="flash-price">
+                  Chỉ còn: <strong>1,820.000đ</strong>
+                </p>
                 <button className="btn-flash-sale">Mua Ngay</button>
               </div>
             </div>
 
             <div className="flash-sale-card">
               <div className="flash-sale-image">
-                <img src="https://via.placeholder.com/400x250/1abc9c/ffffff?text=Nha+Trang" alt="Nha Trang" />
+                <img
+                  src="https://via.placeholder.com/400x250/1abc9c/ffffff?text=Nha+Trang"
+                  alt="Nha Trang"
+                />
                 <span className="flash-badge">🔥 -38%</span>
               </div>
               <div className="flash-sale-info">
                 <h4>Nha Trang Biển 3N2Đ</h4>
                 <p className="flash-original">Giá gốc: 2,200.000đ</p>
-                <p className="flash-price">Chỉ còn: <strong>1,364.000đ</strong></p>
+                <p className="flash-price">
+                  Chỉ còn: <strong>1,364.000đ</strong>
+                </p>
                 <button className="btn-flash-sale">Mua Ngay</button>
               </div>
             </div>
 
             <div className="flash-sale-card">
               <div className="flash-sale-image">
-                <img src="https://via.placeholder.com/400x250/e67e22/ffffff?text=Hôi+An" alt="Hội An" />
+                <img
+                  src="https://via.placeholder.com/400x250/e67e22/ffffff?text=Hôi+An"
+                  alt="Hội An"
+                />
                 <span className="flash-badge">🔥 -32%</span>
               </div>
               <div className="flash-sale-info">
                 <h4>Hội An Cổ Kính 2N1Đ</h4>
                 <p className="flash-original">Giá gốc: 1,950.000đ</p>
-                <p className="flash-price">Chỉ còn: <strong>1,326.000đ</strong></p>
+                <p className="flash-price">
+                  Chỉ còn: <strong>1,326.000đ</strong>
+                </p>
                 <button className="btn-flash-sale">Mua Ngay</button>
               </div>
             </div>
@@ -390,12 +467,16 @@ const HomePage = () => {
                   <div className="featured-tour-image">
                     <img src={tour.image} alt={tour.title} />
                     {tour.discount > 0 && (
-                      <span className="discount-badge-featured">♥ GIẢM {tour.discount}%</span>
+                      <span className="discount-badge-featured">
+                        ♥ GIẢM {tour.discount}%
+                      </span>
                     )}
                   </div>
                   <div className="featured-tour-content">
                     <h3>{tour.title}</h3>
-                    <p className="featured-tour-location">📍 {tour.destination}</p>
+                    <p className="featured-tour-location">
+                      📍 {tour.destination}
+                    </p>
                     <div className="featured-tour-details">
                       <p>
                         <span className="detail-icon">📅</span>
@@ -411,7 +492,10 @@ const HomePage = () => {
                         <del>{formatPrice(tour.originalPrice)}</del>
                         <strong>{formatPrice(tour.price)}</strong>
                       </div>
-                      <Link to={`/tour/${tour.id}`} className="btn-view-featured">
+                      <Link
+                        to={`/tour/${tour.id}`}
+                        className="btn-view-featured"
+                      >
                         Chi Tiết →
                       </Link>
                     </div>
@@ -441,8 +525,12 @@ const HomePage = () => {
               </div>
               <div className="news-content">
                 <h3>Top 5 điểm du lịch độc lạ tại Singapore</h3>
-                <p>Đây là 5 địa điểm du lịch không nên bỏ lỡ khi tới Singapore...</p>
-                <a href="#" className="read-more">Đọc Thêm →</a>
+                <p>
+                  Đây là 5 địa điểm du lịch không nên bỏ lỡ khi tới Singapore...
+                </p>
+                <a href="#" className="read-more">
+                  Đọc Thêm →
+                </a>
               </div>
             </article>
 
@@ -452,8 +540,13 @@ const HomePage = () => {
               </div>
               <div className="news-content">
                 <h3>Những lưu ý khi đi du lịch nước ngoài</h3>
-                <p>Chuẩn bị tốt cho chuyến công tác hoặc du lịch nước ngoài lần đầu...</p>
-                <a href="#" className="read-more">Đọc Thêm →</a>
+                <p>
+                  Chuẩn bị tốt cho chuyến công tác hoặc du lịch nước ngoài lần
+                  đầu...
+                </p>
+                <a href="#" className="read-more">
+                  Đọc Thêm →
+                </a>
               </div>
             </article>
 
@@ -463,8 +556,13 @@ const HomePage = () => {
               </div>
               <div className="news-content">
                 <h3>Cẩm nang du lịch Paris - Thủ đô của tình yêu</h3>
-                <p>Paris được biết đến là thủ đô của tình yêu, được nhiều cặp đôi yêu...</p>
-                <a href="#" className="read-more">Đọc Thêm →</a>
+                <p>
+                  Paris được biết đến là thủ đô của tình yêu, được nhiều cặp đôi
+                  yêu...
+                </p>
+                <a href="#" className="read-more">
+                  Đọc Thêm →
+                </a>
               </div>
             </article>
           </div>
@@ -476,12 +574,10 @@ const HomePage = () => {
         <div className="container">
           <h2>Đăng Ký Nhận Ưu Đãi Từ 28TRAVEL</h2>
           <form className="newsletter-form-home">
-            <input
-              type="email"
-              placeholder="Nhập email của bạn"
-              required
-            />
-            <button type="submit" className="btn-subscribe">Đăng Ký Ngay</button>
+            <input type="email" placeholder="Nhập email của bạn" required />
+            <button type="submit" className="btn-subscribe">
+              Đăng Ký Ngay
+            </button>
           </form>
         </div>
       </section>

@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Header.css';
+import React, { useState } from "react";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchInput.trim()) {
       navigate(`/?search=${encodeURIComponent(searchInput)}`);
-      setSearchInput('');
+      setSearchInput("");
     }
   };
 
@@ -27,14 +27,23 @@ const Header = () => {
               <i className="email-icon">✉️</i> contact@28travel.com
             </span>
             <span className="contact-item">
-              <i className="location-icon">📍</i> 28 Luong Anh Nhat, Ho Chi Minh City
+              <i className="location-icon">📍</i> 28 Luong Anh Nhat, Ho Chi Minh
+              City
             </span>
           </div>
           <div className="header-social">
-            <a href="#facebook" className="social-link">f</a>
-            <a href="#twitter" className="social-link">𝕏</a>
-            <a href="#instagram" className="social-link">📷</a>
-            <a href="#youtube" className="social-link">▶</a>
+            <a href="#facebook" className="social-link">
+              f
+            </a>
+            <a href="#twitter" className="social-link">
+              𝕏
+            </a>
+            <a href="#instagram" className="social-link">
+              📷
+            </a>
+            <a href="#youtube" className="social-link">
+              ▶
+            </a>
           </div>
         </div>
       </div>
@@ -53,18 +62,52 @@ const Header = () => {
 
           {/* Navigation Menu */}
           <nav className="nav-menu">
-            <Link to="/" className="nav-item active">Trang Chủ</Link>
-            <Link to="/tours/domestic" className="nav-item">Tour Trong Nước</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              Trang Chủ
+            </NavLink>
+            <NavLink
+              to="/tours/domestic"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              Tour Trong Nước
+            </NavLink>
             <div className="nav-item dropdown">
               <span>Tour Nước Ngoài ▼</span>
               <div className="dropdown-menu">
-                <a href="#asia" className="dropdown-item">Châu Á</a>
-                <a href="#europe" className="dropdown-item">Châu Âu</a>
-                <a href="#america" className="dropdown-item">Châu Mỹ</a>
+                <a href="#asia" className="dropdown-item">
+                  Châu Á
+                </a>
+                <a href="#europe" className="dropdown-item">
+                  Châu Âu
+                </a>
+                <a href="#america" className="dropdown-item">
+                  Châu Mỹ
+                </a>
               </div>
             </div>
-            <Link to="/about" className="nav-item">Về Chúng Tôi</Link>
-            <Link to="/contact" className="nav-item">Liên Hệ</Link>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              Về Chúng Tôi
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive ? "nav-item active" : "nav-item"
+              }
+            >
+              Liên Hệ
+            </NavLink>
           </nav>
 
           {/* Search and Cart */}
@@ -77,9 +120,15 @@ const Header = () => {
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
-              <button type="submit" className="search-btn">🔍</button>
+              <button type="submit" className="search-btn">
+                🔍
+              </button>
             </form>
-            <button className="cart-btn">
+            <button
+              className="cart-btn"
+              type="button"
+              onClick={() => navigate("/cart")}
+            >
               🛒 <span className="cart-badge">0</span>
             </button>
           </div>

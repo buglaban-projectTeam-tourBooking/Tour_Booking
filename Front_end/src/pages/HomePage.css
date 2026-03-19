@@ -45,7 +45,7 @@
 }
 
 .hero-banner::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -385,6 +385,26 @@
   margin: 10px 0;
 }
 
+.offer-card-quaternary {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: white;
+  grid-column: auto / span 1;
+}
+
+.offer-card-quaternary .offer-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.offer-card-quaternary h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.offer-card-quaternary p {
+  margin: 10px 0;
+}
+
 /* Offer Tour Card */
 .offer-tour-card {
   background: white;
@@ -584,13 +604,17 @@
 }
 
 .destination-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.7) 100%);
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
 
 .destination-info {
