@@ -1,5 +1,35 @@
+version: "3.8"
+
 services:
-  # Tên dịch vụ Frontend
+  # Backend Service
+  backend:
+    build: ./Back_end
+    container_name: backend_container
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./Back_end:/app
+      - /app/node_modules
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+    networks:
+      - tour_network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:5000/api/tours/domestic || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service
   frontend:
     build: ./Front_end
     container_name: frontend_container
@@ -12,15 +42,13 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+      - VITE_API_URL=http://backend:5000
+    networks:
+      - tour_network
+    restart: unless-stopped
+    depends_on:
+      - backend
 
-  # Tên dịch vụ Backend
-  backend:
-    build: ./Back_end
-    container_name: backend_container
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./Back_end:/app
-      - /app/node_modules
-    environment:
-      - PORT=3000
+networks:
+  tour_network:
+    driver: bridge

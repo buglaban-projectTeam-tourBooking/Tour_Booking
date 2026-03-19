@@ -7,7 +7,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 5000
 
-# Sử dụng nodemon để tự động restart khi code thay đổi (nếu có cài)
 CMD ["node", "index.js"]
