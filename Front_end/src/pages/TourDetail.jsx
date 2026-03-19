@@ -5,6 +5,7 @@ import tour3 from "../assets/tour3.svg";
 import tour4 from "../assets/tour4.svg";
 import "./TourDetail.css";
 
+// TODO: Replace static data with API call using import.meta.env.VITE_API_URL
 const TourDetail = () => {
   const tour = useMemo(
     () => ({
