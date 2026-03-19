@@ -9,5 +9,5 @@ COPY . .
 
 EXPOSE 3000
 
-# Sử dụng nodemon để tự động restart khi code thay đổi (nếu có cài)
-CMD ["node", "index.js"]
+# Sử dụng npm start để chạy ứng dụng
+CMD ["npm", "start"]

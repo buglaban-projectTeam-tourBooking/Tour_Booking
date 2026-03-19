@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   # Tên dịch vụ Frontend
   frontend:
@@ -8,6 +10,12 @@ services:
     volumes:
       - ./Front_end:/app
       - /app/node_modules # Giữ lại node_modules trong container để tránh conflict với máy thật
+    environment:
+      - VITE_API_URL=http://backend:3000
+    networks:
+      - tour-booking-network
+    depends_on:
+      - backend
 
   # Tên dịch vụ Backend
   backend:
@@ -20,3 +28,9 @@ services:
       - /app/node_modules
     environment:
       - PORT=3000
+    networks:
+      - tour-booking-network
+
+networks:
+  tour-booking-network:
+    driver: bridge
